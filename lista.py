@@ -15,7 +15,6 @@ def generar_lista_ips():
 #esto tmb porque soy vago y es para hacer los resultados en un archivo txt escalable. los guarda en formato lista_ip_aaaammdd_mmss.txt
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     archivo_salida = f"lista_ips_{timestamp}.txt"
-    conteo_total = 0
     try:
         with open(archivo_entrada, 'r') as f_in, open(archivo_salida, 'w') as f_out:
             for linea in f_in:
@@ -25,8 +24,8 @@ def generar_lista_ips():
                     red = ipaddress.ip_network(segmento, strict=False)
                     for ip in red:
                         f_out.write(str(ip) + '\n')
-                        conteo_total += 1
                 except ValueError:
+                    continue
 #solo pongo un comentario para saber q termino
         print(f"fin en {archivo_salida}")
 
